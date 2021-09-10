@@ -4,15 +4,18 @@ import KuppiService from "../services/api";
 import Card from "../components/Card";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Loading from "../components/Loading";
 
 const Home = () => {
 
     const [products, setProducts] = useState([])
+    const [value, setValue] = useState(false)
 
     const showProducts = async () => {
         try {
             let res = await KuppiService.getProducts()
             setProducts(res.data)
+            setValue(true)
         }
         catch (error) {
             console.log(error)
@@ -29,15 +32,23 @@ const Home = () => {
             <DivHeader>
                 <Header />
             </DivHeader>
-            <DivMain>
-                <Title>Products</Title>
-                {products.map(products => {
-                    return <Card name={products.name} price={products.price} id={products.id} image={products.photo_url}/>
-                })}
-            </DivMain>
-            <DivFooter>
-                <Footer />
-            </DivFooter>
+            {value ?
+                <>
+                    <DivMain>
+                        <Title>Products</Title>
+                        {products.map(products => {
+                            return <Card name={products.name} price={products.price} id={products.id} image={products.photo_url} />
+                        })}
+                    </DivMain>
+                    <DivFooter>
+                        <Footer />
+                    </DivFooter>
+                </>
+                :
+                <DivLoading>
+                    <Loading />
+                </DivLoading>
+            }
         </DivPrincipal>
     )
 }
@@ -65,6 +76,31 @@ const DivMain = styled.main`
     'product product product product product'
     ;
     grid-gap:20px;
+    @media (max-width: 1400px) {
+        grid-template-areas:
+        'title title title title'
+        'product product product product'
+    ;}
+    @media (max-width: 1100px) {
+        grid-template-areas:
+        'title title title'
+        'product product product'
+    ;}
+    @media (max-width: 800px) {
+        grid-template-areas:
+        'title title'
+        'product product'
+    ;}
+    @media (max-width: 550px) {
+        grid-template-areas:
+        'title'
+        'product'
+    ;}
+`
+const DivLoading = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 const DivFooter = styled.footer`
     grid-area:footer;

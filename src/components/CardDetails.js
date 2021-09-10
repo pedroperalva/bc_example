@@ -2,38 +2,49 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import KuppiService from "../services/api";
 import { NavLink, useHistory } from "react-router-dom";
+import Loading from "./Loading";
 
 const CardDetails = ({ id }) => {
 
-    const [product, setProduct] = useState('')
+  const [product, setProduct] = useState('')
+  const [value, setValue] = useState(false)
 
-    useEffect(() => {
-        showProduct(id)
-    }, [])
+  useEffect(() => {
+    showProduct(id)
+  }, [])
 
-    const showProduct = async (id) => {
-        try {
-            let res = await KuppiService.getProductsInfo(id)
-            setProduct(res.data)
-        }
-        catch (error) {
-            console.log(error)
-            alert("Não foi possível carregar.")
-        }
+  const showProduct = async (id) => {
+    try {
+      let res = await KuppiService.getProductsInfo(id)
+      setProduct(res.data)
+      setValue(true)
     }
+    catch (error) {
+      console.log(error)
+      alert("Não foi possível carregar.")
+    }
+  }
 
 
 
-    return (
+  return (
+    <>
+      {value ?
         <DivDetails>
-            <h1 className='name'>{product.name}</h1>
-            <img src={product.photo_url} />
-            <p className='price'>R$ {product.price}</p>
-            <p className='category'><span>Categoria:</span> {product.category}</p>
-            <p className='description'><span>Descrição:</span> {product.description}</p>
-            <NavBack to='/'>Sair</NavBack>
+          <h1 className='name'>{product.name}</h1>
+          <img src={product.photo_url} />
+          <p className='price'>R$ {product.price}</p>
+          <p className='category'><span>Categoria:</span> {product.category}</p>
+          <p className='description'><span>Descrição:</span> {product.description}</p>
+          <NavBack to='/'>Sair</NavBack>
         </DivDetails>
-    )
+        :
+        <DivLoading>
+          <Loading />
+        </DivLoading>
+      }
+    </>
+  )
 }
 
 const DivDetails = styled.div`
@@ -70,6 +81,9 @@ const DivDetails = styled.div`
       align-self: center;
       border-radius: 20px;
       max-width: 100%;
+      @media (max-width: 700px) {
+        margin-bottom: 20px;
+      }
     }
     .price{
       grid-area: price;
@@ -81,6 +95,11 @@ const DivDetails = styled.div`
       display: inline-block;
       line-height: 0.9;
       font-family: 'Roboto', sans-serif;
+      @media (max-width: 700px) {
+        margin-left: 0px;
+        justify-self: center;
+        margin-bottom: 20px;
+      }
     }
     .category{
       grid-area: category;
@@ -89,6 +108,11 @@ const DivDetails = styled.div`
       font-size: 20px;
       margin-left: 80px;
       font-family: 'Roboto', sans-serif;
+      @media (max-width: 700px) {
+        margin-left: 0px;
+        justify-self: center;
+        margin-bottom: 20px;
+      }
     }
     .category span{
       font-weight: bold;
@@ -100,9 +124,32 @@ const DivDetails = styled.div`
       font-size: 20px;
       margin-left: 80px;
       font-family: 'Roboto', sans-serif;
+      @media (max-width: 700px) {
+        margin-left: 0px;
+        justify-self: center;
+        margin-bottom: 20px;
+      }
     }
     .description span{
       font-weight: bold;
+    }
+    @media (max-width: 1000px) {
+        width: 600px;
+    }
+    @media (max-width: 700px) {
+        width: 400px;
+        height: 1200px;
+        grid-template-areas: 
+    'title'
+    'imagem'
+    'price'
+    'category'
+    'description'
+    'sair';
+    }
+    @media (max-width: 500px) {
+        width: 250px;
+        height: 1400px;
     }
 `
 const NavBack = styled(NavLink)`
@@ -121,5 +168,9 @@ const NavBack = styled(NavLink)`
         color:#2CFE84;
     }
 `
-
+const DivLoading = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
 export default CardDetails;

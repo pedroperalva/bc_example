@@ -57,7 +57,11 @@ Para prosseguir faça um Fork desse projeto para utilizá-lo como base no teste.
 Responda as perguntas abaixo com suas próprias palavras, mas também fique livre em aplicar algum desses conceitos na primeira parte do teste.
 
 - Se uma rota é repetida diversas vezes em sua aplicação, como seria possível melhorar a arquitetura para facilitar em manutenções posteriores?
+  R: Todo código que é repetido mais de uma vez, você pode reutilizar. Colocaria essa rota em um arquivo separado e reutilizaria ele.
 - É possível melhorar a performance da solução? Como as melhorias impactam a leitura e manutenção do código?
+  R: Poderia 'cachear' a resposta da requisição e em determinadas situações usar esse cache ao invés de fazer nova requisição. Isso pode tornar o código maior, porém não sei exatamente como fazer e os impactos.
 - De que forma o sistema pode escalar com a arquitetura planejada?
+  R: Não tenho conhecimento necessário para responder essa pergunta.
 - Considerando as informações de retorno nas rotas da API disponibilizada para o teste, qual seria a sua sugestão para o controller que alimentaria essas rotas? Leve em consideração os conhecimentos de RESTful API.
+  R: Fazer apenas 1 GET com uma verificação do parâmetro dentro desse GET. Se vier no parâmetro um id a consulta buscará especificamente por um id, se não vier faria uma busca geral.
 

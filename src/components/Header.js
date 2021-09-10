@@ -6,7 +6,7 @@ import Logo from '../img/logokuppi.png';
 const Header = ()=> {
         return (
             <Cabecalho>
-                <StyledNavLogo to="/"><img src={Logo} alt="Logo Kuppi"/></StyledNavLogo>
+                <NavLogo to="/"><img src={Logo} alt="Logo Kuppi"/></NavLogo>
             </Cabecalho>
         )
 }
@@ -18,7 +18,7 @@ const Cabecalho = styled.header`
     display: flex;
     align-items: center;
 `
-const StyledNavLogo = styled(NavLink)`
+const NavLogo = styled(NavLink)`
     margin-left: 50px;
     img {
         height: 50px;

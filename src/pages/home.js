@@ -31,8 +31,8 @@ const Home = () => {
             </DivHeader>
             <DivMain>
                 <Title>Products</Title>
-                {products.map(produtos => {
-                    return <Card name={produtos.name} price={produtos.price} id={produtos.id} />
+                {products.map(products => {
+                    return <Card name={products.name} price={products.price} id={products.id} image={products.photo_url}/>
                 })}
             </DivMain>
             <DivFooter>
@@ -75,10 +75,11 @@ const Title = styled.h1`
     justify-self: center;
     margin-top: 100px;
     margin-bottom: 80px;
-    font-family: 'Secular One', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
     border-bottom: 0.8rem solid rgb(0, 255, 147);
     display: inline-block;
-    line-height: 0.4;
+    line-height: 0.6;
 `
 
 export default Home;

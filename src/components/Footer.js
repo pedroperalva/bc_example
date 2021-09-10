@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Footer = ()=> {
         return (
             <Rodape>
-               <Copy>Kuppi - Pedro Peralva 2021</Copy>
+               <Copy>© Kuppi - Pedro Peralva - 2021</Copy>
             </Rodape>
         );
 }

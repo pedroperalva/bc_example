@@ -19,7 +19,6 @@ const Home = () => {
         }
         catch (error) {
             console.log(error)
-            alert("Não foi possível carregar.")
         }
     }
 

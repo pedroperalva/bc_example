@@ -26,8 +26,8 @@ const CircleDiv = styled.div`
 const Circle = styled.div`
   background-color: #2CFE84;
   border-radius: 50%;
-  width: 10px;
-  height: 10px;
+  width: 30px;
+  height: 30px;
   margin: 0 5px;
   animation: ${Animation} 0.5s linear infinite;
   animation-delay: ${props => props.delay};

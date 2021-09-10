@@ -21,7 +21,6 @@ const CardDetails = ({ id }) => {
     }
     catch (error) {
       console.log(error)
-      alert("Não foi possível carregar.")
     }
   }
 
